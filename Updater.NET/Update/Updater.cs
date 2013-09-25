@@ -27,8 +27,6 @@ namespace NETUpdater.Update
             frm = view as IUpdaterView;
             argList = new List<AppArgument>();
         }
-        //[DllImport("User32.dll")]
-        //private static extern Int32 SendMessage(int hWnd, int Msg, int wParam, int lParam);
         /// <summary>
         /// Запись аргументов вызова обновлялки
         /// </summary>
