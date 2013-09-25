@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigSchema"
+    targetNamespace="ConfigSchema"
+    elementFormDefault="qualified"
+    xmlns="ConfigSchema"
+    xmlns:mstns="ConfigSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="configs" type="ConfigList"/>
+
+  <xs:complexType name="ConfigList">
+    <xs:sequence>
+      <xs:element name="config" type="ConfigItem" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConfigItem">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="version" type="xs:integer" use="required"/>
+    <xs:attribute name="file" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>
