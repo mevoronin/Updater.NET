@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -70,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Update\AppArgument.cs" />
+    <Compile Include="Update\AppSettings.cs" />
     <Compile Include="Update\Config.cs" />
     <Compile Include="Update\Updater.cs" />
     <Compile Include="Update\UpdaterSettings.cs" />

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configs>
-  <config name="HelloWorld" version="2" file="hello_world.txt"/>
+  <config name="HelloWorld" version="9" file="hello_world.txt"/>
 </configs>

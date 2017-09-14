@@ -5,6 +5,8 @@ using System.Reflection;
 using System.IO;
 using System.Xml.Schema;
 using System.Net;
+using System.Windows.Forms;
+using System.Configuration;
 
 namespace NETUpdater.Update
 {
@@ -110,10 +112,26 @@ namespace NETUpdater.Update
         public string DownloadUpdate(Config config)
         {
             var remoteUri = new Uri(PrepareDownloadPath(String.Format(@"{0}/{1}", _settings.RemoteConfigPath, config.File)));
-            string localPath = PrepareDownloadPath(String.Format(@"{0}/{1}", Path.GetTempPath(), config.File));
+            string dirPath = String.Format(@"{0}/patches", Application.StartupPath);
+            System.IO.Directory.CreateDirectory(dirPath);
+            try
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(dirPath);
 
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+            }
+            catch (Exception) { }
+            string localPath = PrepareDownloadPath(String.Format(@"{0}/{1}", dirPath, config.File));
             using (var client = new WebClient())
             {
+                if (!AppSettings.AllowProxy)
+                {
+                    client.Proxy = null;
+                }
+                client.UseDefaultCredentials = true;
                 using (var remoteStream = client.OpenRead(remoteUri))
                 {
                     using (var fileStream = new FileStream(localPath, FileMode.Create))
@@ -143,6 +161,11 @@ namespace NETUpdater.Update
             {
                 using (var client = new WebClient())
                 {
+                    if (!AppSettings.AllowProxy)
+                    {
+                        client.Proxy = null;
+                    }
+                    client.UseDefaultCredentials = true;
                     using (Stream stream = client.OpenRead(uri))
                     {
                         XmlDocument doc = new XmlDocument();
